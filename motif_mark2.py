@@ -24,6 +24,7 @@ motif_file = args.motif_file
 def CreateOutputFolder():
 	if 'output' not in os.listdir():
 		os.mkdir('./output') # creates output directory at the working directory
+		print('output folder created in current working directory')
 	else:
 		print('output folder detected')
 
@@ -45,7 +46,7 @@ def initialize_motifs(motif_file):
 		AmbiguousNucleotides = ('R', 'Y', 'S', 'W', 'K', 'M', 'B', 'D', 'H', 'V', 'N', 'Z', 'r', 'y', 's', 'w', 'k', 'm', 'b', 'd', 'h', 'v', 'n', 'z')
 		global NumberOfMotifs # accesses global variable NumberOfMotifs
 		for line in motif_file:
-			line = str(line.strip().upper()) # remove newlines, convert to upper, --> string
+			line = str(line.strip().upper()) 
 			NumberOfMotifs += 1
 			# If motif contains any ambiguous bases, calculate all combinations and add to dict as list in values. elif motif is explicit, just add to dict. 
 			if any(x in line for x in AmbiguousNucleotides):
@@ -56,9 +57,6 @@ def initialize_motifs(motif_file):
 	return(MotifDict)
 
 initialize_motifs(motif_file)
-
-print('number of motifs', NumberOfMotifs)
-print('motif dictionary:', MotifDict)
 
 # Create FASTA dictionary
 Gene = {}
@@ -187,46 +185,3 @@ for key, val in GeneFeatures.items():
 	surface.finish()
 
 print("Done")
-
-# Junk code 
-
-	# PyCairo testing 
-
-	# introns [(0, 677), (713, 1314)] # (start, end) 
-	# exons [(677, 713)] # site
-	# motifs {'YGCY': [1185, 367, 577, 698, 739, 766, 777, 868, 977, 1085, 490, 507, 743, 830, 844, 931, 955, 1001]}
-
-	# surface = cairo.SVGSurface('./output/wut.svg', width, height)
-	# context = cairo.Context(surface)
-	# # Draw introns
-	# context.move_to(100, height/2)
-	# context.line_to(100 + 1314, height/2)
-	# context.stroke()
-	# # Draw exons
-	# context.set_source_rgb(0, 0, 0)
-	# context.rectangle(100 + 677, height/2 - 50, (713 - 677), height/2 - 150)
-	# context.fill()
-	# # Draw introns
-	# MotifColors['YGCY'] = col1, col2, col3; context.set_source_rgb(col1, col2, col3); print(col1, col2, col3)
-	# context.rectangle(100 + site, height/2 - 50, len('YGCY'), 20); context.fill()
-	# # Draw legends
-	# context.set_source_rgb(0, 0, 0)
-	# context.set_line_width(5)
-	# # Box 
-	# context.rectangle(width - 300, 0 + 10, 290, 0 + 50 * NumberOfMotifs); context.stroke() # (canvas width - margin, 0 + height margin, ___, ___)
-	# # Motifs
-	# context.set_source_rgb(0.753, 0.2235, 0.1686)
-	# context.rectangle(width - 300 + 200, 0 + 10 + 15, 80, 20); context.fill() # (canvas width - canvas margin + legend width margin, 0 + legend box + legend height margin, height of image)
-	# context.set_source_rgb(0.8, 0.7, 0.5)
-	# context.rectangle(width - 300 + 200, 0 + 10 + 15 * 4, 80, 20); context.fill()
-	# # Texts
-	# context.select_font_face("Calibri", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL); context.set_font_size(15); context.set_source_rgb(0, 0, 0)
-	# context.move_to(width - 300 + 15, 0 + 10 + 25)
-	# context.show_text("YGCY")
-	# context.move_to(width - 300 + 15, 0 + 10 + 25 + 15 * 2)
-	# context.show_text("GGGG")
-	# context.move_to(width - 300 + 15, 0 + 10 + 25 + 15 * 4)
-	# context.show_text("GGGG")
-	# context.move_to(width - 300 + 15, 0 + 10 + 25 + 15 * 6)
-	# context.show_text("GGGG")
-	# surface.finish()  
