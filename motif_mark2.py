@@ -12,7 +12,7 @@ from itertools import product
 from collections import defaultdict
 
 def get_arguments():
-	parser = argparse.ArgumentParser(description="Finds average quality score per bp of a FASTQ file.")
+	parser = argparse.ArgumentParser(description="Motif Mark (MM) draws genes and motifs (to scale) given a FASTA and motif file. MM outputs a series of SVG images with introns, exons, and motifs clearly labeled. MM 1.0 takes in unlimited number of genes, but can only mark up to 16 unique motifs with the built-in color palette.")
 	parser.add_argument("-f", "--file", type=str, help="Select a FASTA file with introns as lower-case letters and exons as upper-case letters.")
 	parser.add_argument("-m", "--motif_file", type=str, help="Select a file with motifs separated by newlines. Ambiguous nucleotides are allowed.")
 	return parser.parse_args()
