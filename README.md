@@ -8,6 +8,10 @@ Each gene in the FASTA file must contain a header, lower-case introns, and upper
 MM outputs a series of SVG images with introns, exons, and motifs clearly labeled. 
 MM 1.0 takes in unlimited number of genes, but can only mark up to 16 unique motifs with the built-in color palette.
 
+EXAMPLE
+
+$ python motif_mark2.py -f MyGenes.fasta -m MyMotifs.txt
+
 NOTE 
 
 Have fun running MM 1.0! 
